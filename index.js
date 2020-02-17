@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const path = require('path')
 const fs = require('fs-extra')
 const argv = require('yargs')
@@ -23,7 +24,7 @@ const argv = require('yargs')
 
 async function start () {
   switch (argv.framework) {
-    case 'svelte':
+    case 'svelte': {
       const dirPath = path.join(process.cwd(), argv.path, argv.name)
       const sveltePath = path.join(dirPath, `${argv.name}.svelte`)
       const storybookPath = path.join(dirPath, `${argv.name}.stories.js`)
@@ -31,11 +32,12 @@ async function start () {
       const storybookSrc = require('./templates-svelte/storybook')({
         name: argv.name
       })
-      
+
       await fs.outputFile(sveltePath, svelteSrc)
       await fs.outputFile(storybookPath, storybookSrc)
 
       return
+    }
     default:
       throw new Error(`framework: ${argv.framework}, not found.`)
   }
