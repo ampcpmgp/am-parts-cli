@@ -2,6 +2,11 @@
 const path = require('path')
 const fs = require('fs-extra')
 const argv = require('yargs')
+  .option('group', {
+    alias: 'g',
+    describe: 'Group name (Folder Name)',
+    type: 'string'
+  })
   .option('name', {
     alias: 'n',
     describe: 'Parts name',
@@ -25,11 +30,12 @@ const argv = require('yargs')
 async function start () {
   switch (argv.framework) {
     case 'svelte': {
-      const dirPath = path.join(process.cwd(), argv.path, argv.name)
+      const dirPath = path.join(process.cwd(), argv.path, argv.group || argv.name)
       const sveltePath = path.join(dirPath, `${argv.name}.svelte`)
       const storybookPath = path.join(dirPath, `${argv.name}.stories.js`)
       const svelteSrc = require('./templates-svelte/parts')()
       const storybookSrc = require('./templates-svelte/storybook')({
+        group: argv.group,
         name: argv.name
       })
 
