@@ -14,7 +14,7 @@ export default {
 }
 
 export const Main = () => ({
-  ${name},
+  Component: ${name},
   props: { text: 'dummy-text' }
 })
 `
