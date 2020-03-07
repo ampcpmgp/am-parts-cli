@@ -4,7 +4,7 @@ module.exports = ({group, name}) => {
     return name
   }
 
-  return `import { withKnobs } from '@storybook/addon-knobs'
+  return `import { withKnobs, text } from '@storybook/addon-knobs'
 import ${name} from './${name}.svelte'
 
 export default {
@@ -15,7 +15,9 @@ export default {
 
 export const Main = () => ({
   Component: ${name},
-  props: { text: 'dummy-text' }
+  props: {
+    message: text('message', 'dummy-text'),
+  }
 })
 `
 }
