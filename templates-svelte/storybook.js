@@ -1,6 +1,6 @@
 module.exports = ({group, name}) => {
   function title () {
-    if (group) return `${group}/${name}`
+    if (group) return `${group} ${name}`
     return name
   }
 
